@@ -10,7 +10,6 @@ we all know that the http request contain CONNECT DELETE GET HEAD OPTIONS PATCH 
  httpparsor是一个处理http请求的php解析器,通过httpparsor来获取http请求数据
 主要处理content types 为**application/json application/xml application/x-www-form-urlencoded multipart/form-data**，特别是在restful模式下面
 经常需要处理multipart/form-data，而且请求方式不为POST的情况
------
 ##特性
 * 统一采用php://input方式获取数据
 * 针对multipart/form-data进行分块解析
