@@ -18,7 +18,7 @@ we all know that the http request contain CONNECT DELETE GET HEAD OPTIONS PATCH 
 * parsor 处理各种content types
 * collection a collection class一个集合类
 * body an HTTP message body 一个消息体
-##example 例子
+##examples
 ```php
 $httpparsor = new \HttpParsor\Http('/tmp/php', $_SERVER);
 $method = $httpparsor->getMethod();
