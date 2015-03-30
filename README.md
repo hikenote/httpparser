@@ -24,10 +24,10 @@ we all know that the http request contain CONNECT DELETE GET HEAD OPTIONS PATCH 
 $httpparsor = new \HttpParsor\Http('/tmp/php', $_SERVER);
 $method = $httpparsor->getMethod();
 if($method == 'GET'){
-   $queryParams = $httpparsor->getQueryParams();
+   $queryParams = $httpparsor->getQueryParams();  //get方式的获取数据
 }else{
-   $parsedBody = $httpparsor->getParsedBody();
+   $parsedBody = $httpparsor->getParsedBody();   //非get方式获取数据
 }
-
+```
 
  
