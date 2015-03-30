@@ -1,6 +1,9 @@
 <?php
 namespace HttpParsor;
 
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use PhpSpec\Exception\Exception;
+
 class Parsor{
     /*
      * the file/image saved path
@@ -10,14 +13,14 @@ class Parsor{
      * create a parsor
      */
     public function __construct($dir){
-        $this->dir = $dir;
+        $this->dir = rtrim(realpath($dir), DIRECTORY_SEPARATOR);
     }
     /*
      * parse a application/xml type input
      */
     public function xmlParse($input){
         if(!$input){
-           return $input;
+            return $input;
         }
         return simplexml_load_string($input);
     }
@@ -81,20 +84,24 @@ class Parsor{
                 isset($matches[4]) and $filename = $matches[4];
                 if($filename){
                     $body = substr($body, 0, -2);
+                    if(!is_dir($this->dir)){
+                        throw new InvalidArgumentException('dir is not exists');
+                    }
                     $tmp_name = $this->dir . '/' . md5($body);
                     //fill the $_FILES array
                     $_FILES[$name]['name'] = $filename;
                     $_FILES[$name]['tmp_name'] = $tmp_name;
                     $_FILES[$name]['size'] = strlen($body);
-                    $_FILES[$name]['error'] = null;
+                    $_FILES[$name]['error'] = 0;
                     $_FILES[$name]['type'] = $headers['content-type'];
-                    file_put_contents($tmp_name, $body);  //make sure this dir is writeable otherwise will throw exception
+                    if(!file_exists($tmp_name)){
+                        file_put_contents($tmp_name, $body);  //make sure this dir is writeable otherwise will throw exception
+                    }
                     continue;
+
                 }
                 $data[$name] = substr($body, 0, strlen($body) - 2);
-
             }
-
         }
         return $data;
     }
