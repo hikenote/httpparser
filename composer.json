@@ -1,0 +1,18 @@
+{
+    "name": "scu2008/httpparsor",
+    "description": "A php parsor to deal with http request",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fanmao zhu",
+            "email": "hikescu2008@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {"HttpParsor\\": "src/"}
+    }
+}
