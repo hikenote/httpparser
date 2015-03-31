@@ -1,13 +1,13 @@
 HttpParser
 ====
-the httpparser is a php parser to deal with http request data.
+   the httpparser is a php parser to deal with http request data.
 the purpose is to solve a kind of http content types,such as **application/json application/xml 
 application/x-www-form-urlencoded multipart/form-data** especially multipart/form-data.
 we all know that the http request contain  DELETE GET HEAD  PATCH POST PUT. for many frameworks such as laravel 
  slim use the php://input method to get the http data,while this is not very well to deal with multipart/form-data as not POST method(as PATCH PUT).it most appears in RESTful pattern.
 
 -----
- httpparser是一个处理http请求数据的php解析器,通过httpparser来解析各种类型的http请求数据
+   httpparser是一个处理http请求数据的php解析器,通过httpparser来解析各种类型的http请求数据
 content-type 为**application/json application/xml application/x-www-form-urlencoded multipart/form-data**，特别是在restful模式下面
 经常需要处理multipart/form-data，而且请求方式不为POST的情况
 ##  特性
