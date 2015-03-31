@@ -65,19 +65,19 @@ class Http{
         $this->parsor = new Parser();
         //parse application/json
         $this->registerMediaTypeParser('application/json', function ($input) {
-            return $this->parsor->jsonParse($input);
+            return $this->parsor->parseJson($input);
         });
         //parse application/xml
         $this->registerMediaTypeParser('application/xml', function ($input) {
-            return $this->parsor->xmlParse($input);
+            return $this->parsor->parseXml($input);
         });
         //parse application/x-www-form-urlencoded
         $this->registerMediaTypeParser('application/x-www-form-urlencoded', function ($input) {
-            return $this->parsor->urlencodedParse($input);
+            return $this->parsor->parseUrlencoded($input);
         });
         //parse multipart/form-data
         $this->registerMediaTypeParser('multipart/form-data', function ($input) {
-            return $this->parsor->multipartParse($input, $this->getMethod());
+            return $this->parsor->parseMultipart($input, $this->getMethod());
         });
     }
     /**
