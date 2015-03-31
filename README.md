@@ -21,8 +21,8 @@ we all know that the http request contain CONNECT DELETE GET HEAD OPTIONS PATCH 
 * body an HTTP message body 一个消息体
 
 ## attentions 注意事项
-* 文件上传不再使用$_FILES数组处理
-* 文件内容不是文件名的方式而是采用字符串的方式保存
+* 当使用非POST方式上传文件时不再使用$_FILES数组处理
+* 当使用非POST方式上传文件时文件内容不是文件名的方式而是采用字符串的方式保存
 
 ## examples
 ```php
