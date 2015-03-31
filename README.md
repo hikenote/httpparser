@@ -21,12 +21,12 @@ we all know that the http request contain CONNECT DELETE GET HEAD OPTIONS PATCH 
 * body an HTTP message body 一个消息体
 
 ## attentions 注意事项
-* 初始化时目录需确保可写，主要用于文件上传
-* 在上传文件且非POST方式时移动文件不能采用move_uploaded_file(仅用于post方式),可以采用copy、unlink方式
+* 文件上传不再使用$_FILES数组处理
+* 文件内容不是文件名的方式而是采用字符串的方式保存
 
 ## examples
 ```php
-$httpparsor = new \HttpParsor\Http('/tmp/php', $_SERVER);
+$httpparsor = new \HttpParsor\Http();
 $method = $httpparsor->getMethod();
 if($method == 'GET'){
    $queryParams = $httpparsor->getQueryParams();  //get方式的获取数据
