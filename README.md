@@ -1,6 +1,6 @@
 HttpParser
 ====
-the httpparser is a php parsor to deal with http request.
+the httpparser is a php parser to deal with http request.
 the purpose is to solve a kind of http content types,such as **application/json application/xml 
 application/x-www-form-urlencoded multipart/form-data** especially multipart/form-data.
 we all know that the http request contain CONNECT DELETE GET HEAD OPTIONS PATCH POST PUT TRACE. for many frameworks such as laravel 
