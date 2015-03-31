@@ -3,14 +3,9 @@ namespace HttpParsor;
 
 class Parsor{
     /*
-     * the file/image saved path
-     */
-    protected $dir;
-    /*
      * create a parsor
      */
-    public function __construct($dir){
-        $this->dir = rtrim(realpath($dir), DIRECTORY_SEPARATOR);
+    public function __construct(){
     }
     /*
      * parse a application/xml type input
@@ -81,31 +76,21 @@ class Parsor{
                 isset($matches[4]) and $filename = $matches[4];
                 if($filename){
                     $body = substr($body, 0, -2);
-                    //fill the $_FILES array
-                    $_FILES[$name] = [];
-                    $tmp_name = $this->dir . '/' . md5($body);
-                    $_FILES[$name]['name'] = $filename;
-                    $_FILES[$name]['tmp_name'] = $tmp_name;
-                    $_FILES[$name]['size'] = strlen($body);
-                    $_FILES[$name]['type'] = $headers['content-type'];
-                    if(!is_dir($this->dir) && !mkdir($this->dir)){
-                        $_FILES[$name]['error'] = UPLOAD_ERR_NO_TMP_DIR;
+                    $data[$name] = [];
+                    $data[$name]['name'] = $filename;
+                    $data[$name]['body'] = $body;
+                    $data[$name]['size'] = strlen($body);
+                    $data[$name]['type'] = $headers['content-type'];
+                    if($data[$name]['size']/1024/1024 > (int)ini_get('upload_max_filesize')){
+                        $data[$name]['error'] = UPLOAD_ERR_INI_SIZE;
                         continue;
                     }
-                    if($_FILES[$name]['size']/1024/1024 > (int)ini_get('upload_max_filesize')){
-                        $_FILES[$name]['error'] = UPLOAD_ERR_INI_SIZE;
+                    if($data[$name]['size'] <= 0){
+                        $data[$name]['error'] = UPLOAD_ERR_NO_FILE;
                         continue;
                     }
-                    if($_FILES[$name]['size'] <= 0){
-                        $_FILES[$name]['error'] = UPLOAD_ERR_NO_FILE;
-                        continue;
-                    }
-                    $_FILES[$name]['error'] = UPLOAD_ERR_OK;
-                    if(!file_exists($tmp_name)){
-                        file_put_contents($tmp_name, $body);  //make sure this dir is writeable otherwise will throw exception
-                    }
+                    $data[$name]['error'] = UPLOAD_ERR_OK;
                     continue;
-
                 }
                 $data[$name] = substr($body, 0, strlen($body) - 2);
             }

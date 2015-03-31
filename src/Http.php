@@ -56,10 +56,13 @@ class Http{
     /*
      * create a http request
      */
-    function __construct($dir='/tmp/php', $env=array()){
+    function __construct($env=array()){
         $this->body = new Body(fopen('php://input', 'r'));
+        if(empty($env)){
+            $env = $_SERVER;
+        }
         $this->headers = new Collection($env);
-        $this->parsor = new Parsor($dir);
+        $this->parsor = new Parsor();
         //parse application/json
         $this->registerMediaTypeParser('application/json', function ($input) {
             return $this->parsor->jsonParse($input);
