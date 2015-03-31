@@ -10,7 +10,7 @@ class Parser{
     /*
      * parse a application/xml type input
      */
-    public function xmlParse($input){
+    public function parseXml($input){
         if(!$input){
             return $input;
         }
@@ -20,7 +20,7 @@ class Parser{
     /*
      * parse a application/json type input
      */
-    public function jsonParse($input){
+    public function parseJson($input){
         if(!$input){
             return $input;
         }
@@ -30,7 +30,7 @@ class Parser{
     /*
      * parse a application/x-www-form-urlencoded type input
      */
-    public function urlencodedParse($input){
+    public function parseUrlencoded($input){
         if(!$input){
             return $input;
         }
@@ -41,7 +41,7 @@ class Parser{
     /*
      * parse a multipart/form-data type input
      */
-    public function multipartParse($input, $method='POST'){
+    public function parseMultipart($input, $method='POST'){
         if($method == 'POST'){  //in this condition the php://input method will be null
             return $_POST;
         }
