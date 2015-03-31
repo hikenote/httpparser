@@ -1,6 +1,6 @@
 {
-    "name": "scu2008/httpparsor",
-    "description": "A php parsor to deal with http request",
+    "name": "scu2008/httpparser",
+    "description": "A php parser to deal with http request",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -15,6 +15,6 @@
     },
 
     "autoload": {
-        "psr-4": {"HttpParsor\\": "src/"}
+        "psr-4": {"HttpParser\\": "src/"}
     }
 }

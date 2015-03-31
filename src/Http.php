@@ -1,8 +1,8 @@
 <?php
-namespace HttpParsor;
-use HttpParsor\Collection;
-use HttpParsor\Body;
-use HttpParsor\Parsor;
+namespace HttpParser;
+use HttpParser\Collection;
+use HttpParser\Body;
+use HttpParser\Parser;
 
 class Http{
     /**
@@ -40,11 +40,11 @@ class Http{
     /**
      * The request headers
      *
-     * @var \HttpParsor\Collection
+     * @var \HttpParser\Collection
      */
     protected $headers;
     /*
-     * the body parsor
+     * the body parser
      */
     protected $parsor;
     /**
@@ -62,7 +62,7 @@ class Http{
             $env = $_SERVER;
         }
         $this->headers = new Collection($env);
-        $this->parsor = new Parsor();
+        $this->parsor = new Parser();
         //parse application/json
         $this->registerMediaTypeParser('application/json', function ($input) {
             return $this->parsor->jsonParse($input);

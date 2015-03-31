@@ -1,5 +1,5 @@
 <?php
-namespace HttpParsor;
+namespace HttpParser;
 
 /**
  * Body

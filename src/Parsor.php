@@ -1,9 +1,9 @@
 <?php
-namespace HttpParsor;
+namespace HttpParser;
 
-class Parsor{
+class Parser{
     /*
-     * create a parsor
+     * create a parser
      */
     public function __construct(){
     }
