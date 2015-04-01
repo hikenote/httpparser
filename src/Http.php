@@ -46,7 +46,7 @@ class Http{
     /*
      * the body parser
      */
-    protected $parsor;
+    protected $parser;
     /**
      * Valid request methods
      *
@@ -62,22 +62,22 @@ class Http{
             $env = $_SERVER;
         }
         $this->headers = new Collection($env);
-        $this->parsor = new Parser();
+        $this->parser = new Parser();
         //parse application/json
         $this->registerMediaTypeParser('application/json', function ($input) {
-            return $this->parsor->parseJson($input);
+            return $this->parser->parseJson($input);
         });
         //parse application/xml
         $this->registerMediaTypeParser('application/xml', function ($input) {
-            return $this->parsor->parseXml($input);
+            return $this->parser->parseXml($input);
         });
         //parse application/x-www-form-urlencoded
         $this->registerMediaTypeParser('application/x-www-form-urlencoded', function ($input) {
-            return $this->parsor->parseUrlencoded($input);
+            return $this->parser->parseUrlencoded($input);
         });
         //parse multipart/form-data
         $this->registerMediaTypeParser('multipart/form-data', function ($input) {
-            return $this->parsor->parseMultipart($input, $this->getMethod());
+            return $this->parser->parseMultipart($input, $this->getMethod());
         });
     }
     /**
