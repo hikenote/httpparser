@@ -12,7 +12,7 @@ class Parser{
      */
     public function parseXml($input){
         if(!$input){
-            return $input;
+            return array();
         }
         return simplexml_load_string($input);
     }
@@ -22,7 +22,7 @@ class Parser{
      */
     public function parseJson($input){
         if(!$input){
-            return $input;
+            return array();
         }
         return json_decode($input, 1);
     }
@@ -32,7 +32,7 @@ class Parser{
      */
     public function parseUrlencoded($input){
         if(!$input){
-            return $input;
+            return array();
         }
         parse_str($input, $data);
         return $data;
