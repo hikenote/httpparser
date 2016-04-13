@@ -71,6 +71,10 @@ class Http{
         $this->registerMediaTypeParser('application/xml', function ($input) {
             return $this->parser->parseXml($input);
         });
+        //parse application/text/xml
+        $this->registerMediaTypeParser('text/xml', function ($input) {
+            return $this->parser->parseXml($input);
+        });
         //parse application/x-www-form-urlencoded
         $this->registerMediaTypeParser('application/x-www-form-urlencoded', function ($input) {
             return $this->parser->parseUrlencoded($input);

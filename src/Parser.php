@@ -14,7 +14,10 @@ class Parser{
         if(!$input){
             return array();
         }
-        return simplexml_load_string($input);
+        $backup = libxml_disable_entity_loader(true);
+        $result = simplexml_load_string($input);
+        libxml_disable_entity_loader($backup);
+        return $result;
     }
 
     /*
