@@ -20,7 +20,7 @@ class Http{
     /**
      * The request body object
      *
-     * @var \Psr\Http\Message\StreamableInterface
+     * @var resource
      */
     protected $body;
 
@@ -52,7 +52,17 @@ class Http{
      *
      * @var string[]
      */
-    protected $validMethods = ['CONNECT', 'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT', 'TRACE'];
+    protected $validMethods = [
+        'CONNECT' => 1,
+        'DELETE'  => 1,
+        'GET' => 1,
+        'HEAD' => 1,
+        'OPTIONS' => 1,
+        'PATCH' => 1,
+        'POST' => 1,
+        'PUT' => 1,
+        'TRACE' => 1
+    ];
     /*
      * create a http request
      */
@@ -89,7 +99,7 @@ class Http{
      *
      * @param  null|string $method
      * @return null|string
-     * @throws InvalidArgumentException on invalid HTTP method.
+     * @throws \InvalidArgumentException on invalid HTTP method.
      */
     protected function filterMethod($method)
     {
@@ -97,7 +107,7 @@ class Http{
             return $method;
         }
 
-        if (is_string($method) === false) {
+        if (!is_string($method)) {
             throw new \InvalidArgumentException(sprintf(
                 'Unsupported HTTP method; must be a string, received %s',
                 (is_object($method) ? get_class($method) : gettype($method))
@@ -105,7 +115,7 @@ class Http{
         }
 
         $method = strtoupper($method);
-        if (in_array($method, $this->validMethods, true) === false) {
+        if (!isset($this->validMethods[$method])) {
             throw new \InvalidArgumentException(sprintf(
                 'Unsupported HTTP method "%s" provided',
                 $method
@@ -121,16 +131,15 @@ class Http{
      */
     public function getContentType()
     {
-        if(!$this->headers->get('CONTENT_TYPE')){
-            return;
-        }
+        if(!$this->headers->get('CONTENT_TYPE'))
+            return null;
         $contentType = $this->headers->get('CONTENT_TYPE');
         if ($contentType) {
             $contentTypeParts = preg_split('/\s*[;,]\s*/', $contentType);
 
             return strtolower($contentTypeParts[0]);
         }
-        return;
+        return null;
     }
     /**
      * Get the HTTP request method
